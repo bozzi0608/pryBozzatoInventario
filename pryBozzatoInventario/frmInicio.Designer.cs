@@ -250,6 +250,7 @@
             Controls.Add(tabControl1);
             Name = "frmInicio";
             Text = "INICIO";
+            Load += frmInicio_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
