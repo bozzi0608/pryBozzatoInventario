@@ -16,5 +16,10 @@ namespace pryBozzatoInventario
         {
             InitializeComponent();
         }
+
+        private void frmInicio_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
