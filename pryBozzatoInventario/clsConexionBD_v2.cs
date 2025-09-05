@@ -17,13 +17,16 @@ namespace pryBozzatoInventario
     {
         //cadena de conexion
         //sql - string cadenaConexion = "Server=localhost;Database=Ventas2;Trusted_Connection=True;";
-        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source../../../../=Database3.accdb";
+        string cadenaConexion = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\Alumno\\source\\repos\\pryBozzatoInventario\\pryBozzatoInventario\\base de datos\\Database3.accdb";
+
         //conector
         //SqlConnection coneccionBaseDatos;
         OleDbConnection coneccionBaseDatos;
         //comando
         //SqlCommand comandoBaseDatos;
         OleDbCommand comandoBaseDatos;
+
+        OleDbDataReader lectorDataReader;
 
         public string nombreBaseDeDatos;
 
@@ -37,15 +40,30 @@ namespace pryBozzatoInventario
                 nombreBaseDeDatos = coneccionBaseDatos.Database;
 
                 coneccionBaseDatos.Open();
-                
-                MessageBox.Show("Conectado a " + nombreBaseDeDatos);
+
+               // MessageBox.Show("Conectado a " + nombreBaseDeDatos);
             }
             catch (Exception error)
             {
                 MessageBox.Show("Tiene un errorcito - " + error.Message);
-            }     
+            }
 
         }
 
+        public void cargarCategorias(ComboBox ListaCategoria)
+        {
+            comandoBaseDatos = new OleDbCommand();
+            comandoBaseDatos.Connection = coneccionBaseDatos;
+            comandoBaseDatos.CommandType = System.Data.CommandType.Text;
+            comandoBaseDatos.CommandText =
+                "SELECT marca_nombre FROM Productos";
+            lectorDataReader = comandoBaseDatos.ExecuteReader();
+
+            while (lectorDataReader.Read())
+            {
+                ListaCategoria.Items.Add(lectorDataReader[0]);
+            }
+
+        }
     }
 }
